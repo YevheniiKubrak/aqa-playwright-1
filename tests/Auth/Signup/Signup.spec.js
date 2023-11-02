@@ -4,15 +4,17 @@ import {expect, test} from "@playwright/test";
 
 test.describe('Account creation', ()=>{
     test('Successful Signup', async({page})=> {
-        const firstName = faker.person.firstName()
-        const lastName = faker.person.lastName()
-        const email = faker.internet.email({firstName : 'aqa'})
-        const password = faker.internet.password({length: 9, prefix: 'Qw1'})
+        const user = {
+            firstName: faker.person.firstName(), 
+            lastName: faker.person.lastName(),
+            email: faker.internet.email({firstName : 'aqa'}),
+            password: faker.internet.password({length: 9, prefix: 'Qw1'})
+        }
         await page.goto('/')
 
-        const registration = page.locator('button:text("Sign up")')
-        await expect(registration, "Registration link should be visible").toBeVisible()
-        await registration.click()
+        const signUpButton = page.locator('button:text("Sign up")')
+        await expect(signUpButton, "Registration link should be visible").toBeVisible()
+        await signUpButton.click()
 
         const popup = page.locator('div.modal-dialog')
         await expect(popup, "Registration in popup should be visible").toBeVisible()
@@ -25,12 +27,12 @@ test.describe('Account creation', ()=>{
         const registerButton = popup.locator('.btn-primary')
 
         
-        await nameInput.fill(firstName)
-        await lastNameInput.fill(lastName)
-        await emailInput.fill(email)
-        await passwordInput.fill(password)
-        await reenterInput.fill(password)
-        await expect(registerButton, "Register button should be disabled").toBeEnabled()
+        await nameInput.fill(user.firstName)
+        await lastNameInput.fill(user.lastName)
+        await emailInput.fill(user.email)
+        await passwordInput.fill(user.password)
+        await reenterInput.fill(user.password)
+        await expect(registerButton, "Register button should be Enabled").toBeEnabled()
         await registerButton.click()
 
         await expect(page).toHaveURL('https://qauto.forstudy.space/panel/garage')
@@ -40,15 +42,17 @@ test.describe('Account creation', ()=>{
 
 test.describe('Sign up validation', ()=>{
     test('Should show error message when firstname is empty', async({page})=>{
-        const firstName = ''
-        const lastName = faker.person.lastName()
-        const email = faker.internet.email({firstName : 'aqa'})
-        const password = faker.internet.password({length: 9, prefix: 'Qw1'})
+        const user = {
+            firstName: '', 
+            lastName: faker.person.lastName(),
+            email: faker.internet.email({firstName : 'aqa'}),
+            password: faker.internet.password({length: 9, prefix: 'Qw1'})
+        }
         await page.goto('/')
 
-        const registration = page.locator('button:text("Sign up")')
-        await expect(registration, "Registration link should be visible").toBeVisible()
-        await registration.click()
+        const signUpButton = page.locator('button:text("Sign up")')
+        await expect(signUpButton, "Registration link should be visible").toBeVisible()
+        await signUpButton.click()
 
         const popup = page.locator('div.modal-dialog')
         await expect(popup, "Registration in popup should be visible").toBeVisible()
@@ -60,11 +64,11 @@ test.describe('Sign up validation', ()=>{
         const reenterInput = popup.locator('input#signupRepeatPassword')
         const registerButton = popup.locator('.btn-primary')
 
-        await nameInput.fill(firstName)
-        await lastNameInput.fill(lastName)
-        await emailInput.fill(email)
-        await passwordInput.fill(password)
-        await reenterInput.fill(password)
+        await nameInput.fill(user.firstName)
+        await lastNameInput.fill(user.lastName)
+        await emailInput.fill(user.email)
+        await passwordInput.fill(user.password)
+        await reenterInput.fill(user.password)
         await expect(registerButton, "Register button should be disabled").toBeDisabled()
 
         const firstNameErrorMessage = popup.locator('div.invalid-feedback')
@@ -74,15 +78,17 @@ test.describe('Sign up validation', ()=>{
     });
 
     test('Should show error message when lastname is longer than 20 characters', async({page})=>{
-        const firstName = faker.person.firstName()
-        const lastName = faker.string.fromCharacters('abc', 21)
-        const email = faker.internet.email({firstName : 'aqa'})
-        const password = faker.internet.password({length: 9, prefix: 'Qw1'})
+        const user = {
+            firstName: faker.person.firstName(), 
+            lastName: faker.string.fromCharacters('abc', 21),
+            email: faker.internet.email({firstName : 'aqa'}),
+            password: faker.internet.password({length: 9, prefix: 'Qw1'})
+        }
         await page.goto('/')
 
-        const registration = page.locator('button:text("Sign up")')
-        await expect(registration, "Registration link should be visible").toBeVisible()
-        await registration.click()
+        const signUpButton = page.locator('button:text("Sign up")')
+        await expect(signUpButton, "Registration link should be visible").toBeVisible()
+        await signUpButton.click()
 
         const popup = page.locator('div.modal-dialog')
         await expect(popup, "Registration in popup should be visible").toBeVisible()
@@ -94,11 +100,11 @@ test.describe('Sign up validation', ()=>{
         const reenterInput = popup.locator('input#signupRepeatPassword')
         const registerButton = popup.locator('.btn-primary')
 
-        await nameInput.fill(firstName)
-        await lastNameInput.fill(lastName)
-        await emailInput.fill(email)
-        await passwordInput.fill(password)
-        await reenterInput.fill(password)
+        await nameInput.fill(user.firstName)
+        await lastNameInput.fill(user.lastName)
+        await emailInput.fill(user.email)
+        await passwordInput.fill(user.password)
+        await reenterInput.fill(user.password)
         await expect(registerButton, "Register button should be disabled").toBeDisabled()
 
         const lastNameErrorMessage = popup.locator('div.invalid-feedback')
@@ -108,15 +114,17 @@ test.describe('Sign up validation', ()=>{
 
     
     test('Should show error message when email has no @', async({page})=>{
-        const firstName = faker.person.firstName()
-        const lastName = faker.person.lastName()
-        const email = 'email.com'
-        const password = faker.internet.password({length: 9, prefix: 'Qw1'})
+        const user = {
+            firstName: faker.person.firstName(), 
+            lastName: faker.person.lastName(),
+            email: 'email.com',
+            password: faker.internet.password({length: 9, prefix: 'Qw1'})
+        }
         await page.goto('/')
 
-        const registration = page.locator('button:text("Sign up")')
-        await expect(registration, "Registration link should be visible").toBeVisible()
-        await registration.click()
+        const signUpButton = page.locator('button:text("Sign up")')
+        await expect(signUpButton, "Registration link should be visible").toBeVisible()
+        await signUpButton.click()
 
         const popup = page.locator('div.modal-dialog')
         await expect(popup, "Registration in popup should be visible").toBeVisible()
@@ -128,11 +136,11 @@ test.describe('Sign up validation', ()=>{
         const reenterInput = popup.locator('input#signupRepeatPassword')
         const registerButton = popup.locator('.btn-primary')
 
-        await nameInput.fill(firstName)
-        await lastNameInput.fill(lastName)
-        await emailInput.fill(email)
-        await passwordInput.fill(password)
-        await reenterInput.fill(password)
+        await nameInput.fill(user.firstName)
+        await lastNameInput.fill(user.lastName)
+        await emailInput.fill(user.email)
+        await passwordInput.fill(user.password)
+        await reenterInput.fill(user.password)
         await expect(registerButton, "Register button should be disabled").toBeDisabled()
 
         const emailErrorMessage = popup.locator('div.invalid-feedback')
@@ -141,15 +149,17 @@ test.describe('Sign up validation', ()=>{
     });
 
     test('Should show error message when password has no numbers', async({page})=>{
-        const firstName = faker.person.firstName()
-        const lastName = faker.person.lastName()
-        const email = faker.internet.email({firstName : 'aqa'})
-        const password = 'Qwertyuiopa'
+        const user = {
+            firstName: faker.person.firstName(), 
+            lastName: faker.person.lastName(),
+            email: faker.internet.email({firstName : 'aqa'}),
+            password: 'Qwertyuiopa'
+        }
         await page.goto('/')
 
-        const registration = page.locator('button:text("Sign up")')
-        await expect(registration, "Registration link should be visible").toBeVisible()
-        await registration.click()
+        const signUpButton = page.locator('button:text("Sign up")')
+        await expect(signUpButton, "Registration link should be visible").toBeVisible()
+        await signUpButton.click()
 
         const popup = page.locator('div.modal-dialog')
         await expect(popup, "Registration in popup should be visible").toBeVisible()
@@ -161,11 +171,11 @@ test.describe('Sign up validation', ()=>{
         const reenterInput = popup.locator('input#signupRepeatPassword')
         const registerButton = popup.locator('.btn-primary')
 
-        await nameInput.fill(firstName)
-        await lastNameInput.fill(lastName)
-        await emailInput.fill(email)
-        await passwordInput.fill(password)
-        await reenterInput.fill(password)
+        await nameInput.fill(user.firstName)
+        await lastNameInput.fill(user.lastName)
+        await emailInput.fill(user.email)
+        await passwordInput.fill(user.password)
+        await reenterInput.fill(user.password)
         await expect(registerButton, "Register button should be disabled").toBeDisabled()
 
         const passwordErrorMessage = popup.locator('div.invalid-feedback')
@@ -174,16 +184,18 @@ test.describe('Sign up validation', ()=>{
     });
 
     test('Should show error message when password do not match', async({page})=>{
-        const firstName = faker.person.firstName()
-        const lastName = faker.person.lastName()
-        const email = faker.internet.email({firstName : 'aqa'})
-        const password = faker.internet.password({length: 9, prefix: 'Qw1'})
-        const reenterPassword = 'Qwertyuiopasdf1'
+        const user = {
+            firstName: faker.person.firstName(), 
+            lastName: faker.person.lastName(),
+            email: faker.internet.email({firstName : 'aqa'}),
+            password: faker.internet.password({length: 9, prefix: 'Qw1'}),
+            reenterPassword: 'Qwertyuiopasdf1'
+        }
         await page.goto('/')
 
-        const registration = page.locator('button:text("Sign up")')
-        await expect(registration, "Registration link should be visible").toBeVisible()
-        await registration.click()
+        const signUpButton = page.locator('button:text("Sign up")')
+        await expect(signUpButton, "Registration link should be visible").toBeVisible()
+        await signUpButton.click()
 
         const popup = page.locator('div.modal-dialog')
         await expect(popup, "Registration in popup should be visible").toBeVisible()
@@ -195,11 +207,11 @@ test.describe('Sign up validation', ()=>{
         const reenterInput = popup.locator('input#signupRepeatPassword')
         const registerButton = popup.locator('.btn-primary')
 
-        await nameInput.fill(firstName)
-        await lastNameInput.fill(lastName)
-        await emailInput.fill(email)
-        await passwordInput.fill(password)
-        await reenterInput.fill(reenterPassword)
+        await nameInput.fill(user.firstName)
+        await lastNameInput.fill(user.lastName)
+        await emailInput.fill(user.email)
+        await passwordInput.fill(user.password)
+        await reenterInput.fill(user.reenterPassword)
         await nameInput.focus()
         await expect(registerButton, "Register button should be disabled").toBeDisabled()
 
