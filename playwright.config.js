@@ -28,6 +28,8 @@ const config =  defineConfig({
       username: "guest",
       password: "welcome2qauto"
     },
+    screenshot: 'only-on-failure'
+    ,
     /* Base URL to use in actions like `await page.goto('/')`. */
     baseURL: 'https://qauto.forstudy.space/',
 
