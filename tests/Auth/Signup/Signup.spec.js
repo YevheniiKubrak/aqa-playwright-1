@@ -25,14 +25,14 @@ test.describe('Account creation', ()=>{
     })
 
     test('Successful Signup', async({page})=> {
-        const user = {
+        const signUpData = {
             name: faker.person.firstName(), 
             lastName: faker.person.lastName(),
             email: faker.internet.email({firstName : 'aqa'}),
             password: faker.internet.password({length: 9, prefix: 'Qw1'})
         }
         signUpPopup = await welcomePage.openSignupPopup()
-        await signUpPopup.createAccount(user)
+        await signUpPopup.createAccount(signUpData)
         }
     )
 });
@@ -61,71 +61,75 @@ test.describe('Sign up validation', ()=>{
     })
 
     test('Should show error message when firstname is empty', async({page})=>{
-        const user = {
-            name: '', 
+        const password= faker.internet.password({length: 9, prefix: 'Qw1'})
+        const signUpData = {
+            name: '',
             lastName: faker.person.lastName(),
             email: faker.internet.email({firstName : 'aqa'}),
-            password: faker.internet.password({length: 9, prefix: 'Qw1'})
+            password,
+            reenterPassword: password
         }
-        user.reenterPassword = user.password
 
         signUpPopup = await welcomePage.openSignupPopup()
-        await signUpPopup.fillSignupForm(user)
+        await signUpPopup.fillSignupForm(signUpData)
         await expect(signUpPopup.registerButton, "Register button should be disabled").toBeDisabled()
         await expect(signUpPopup.errorMessage, "Error message should be shown when user hasn't entered a name").toHaveText('Name required')
         await expect(signUpPopup.nameInput).toHaveCSS('border-color', redBorder)
     });
 
     test('Should show error message when lastname is longer than 20 characters', async({page})=>{
-        const user = {
+        const password= faker.internet.password({length: 9, prefix: 'Qw1'})
+        const signUpData = {
             name: faker.person.firstName(), 
             lastName: faker.string.fromCharacters('abc', 21),
             email: faker.internet.email({firstName : 'aqa'}),
-            password: faker.internet.password({length: 9, prefix: 'Qw1'}),
+            password,
+            reenterPassword: password
         }
-        user.reenterPassword = user.password
 
         signUpPopup = await welcomePage.openSignupPopup()
-        await signUpPopup.fillSignupForm(user)
+        await signUpPopup.fillSignupForm(signUpData)
         await expect(signUpPopup.registerButton, "Register button should be disabled").toBeDisabled()
         await expect(signUpPopup.errorMessage, "Error message should be shown when user has entered lastname longer than 20 charecters").toHaveText('Last name has to be from 2 to 20 characters long')
         await expect(signUpPopup.lastNameInput).toHaveCSS('border-color', redBorder)
     });
 
     test('Should show error message when email has no @', async({page})=>{
-        const user = {
+        const password= faker.internet.password({length: 9, prefix: 'Qw1'})
+        const signUpData = {
             name: faker.person.firstName(), 
             lastName: faker.person.lastName(),
             email: 'email.com',
-            password: faker.internet.password({length: 9, prefix: 'Qw1'}),
+            password,
+            reenterPassword: password        
         }
-        user.reenterPassword = user.password
 
         signUpPopup = await welcomePage.openSignupPopup()
-        await signUpPopup.fillSignupForm(user)
+        await signUpPopup.fillSignupForm(signUpData)
         await expect(signUpPopup.registerButton, "Register button should be disabled").toBeDisabled()
         await expect(signUpPopup.errorMessage, "Error message should be shown when user has entered invalid email").toHaveText('Email is incorrect')
         await expect(signUpPopup.emailInput).toHaveCSS('border-color', redBorder)
     });
 
     test('Should show error message when password has no numbers', async({page})=>{
-        const user = {
+        const password= 'Qwertyuiopa'
+        const signUpData = {
             name: faker.person.firstName(), 
             lastName: faker.person.lastName(),
             email: faker.internet.email({firstName : 'aqa'}),
-            password: 'Qwertyuiopa',
+            password,
+            reenterPassword: password             
         }
-        user.reenterPassword = user.password
 
         signUpPopup = await welcomePage.openSignupPopup()
-        await signUpPopup.fillSignupForm(user)
+        await signUpPopup.fillSignupForm(signUpData)
         await expect(signUpPopup.registerButton, "Register button should be disabled").toBeDisabled()
         await expect(signUpPopup.errorMessage, "Error message should be shown when user has entered password without numbers").toHaveText('Password has to be from 8 to 15 characters long and contain at least one integer, one capital, and one small letter')
         await expect(signUpPopup.passwordInput).toHaveCSS('border-color', redBorder)
     });
 
     test('Should show error message when password do not match', async({page})=>{
-        const user = {
+        const signUpData = {
             name: faker.person.firstName(), 
             lastName: faker.person.lastName(),
             email: faker.internet.email({firstName : 'aqa'}),
@@ -135,7 +139,7 @@ test.describe('Sign up validation', ()=>{
         }
 
         signUpPopup = await welcomePage.openSignupPopup()
-        await signUpPopup.fillSignupForm(user)
+        await signUpPopup.fillSignupForm(signUpData)
         await expect(signUpPopup.registerButton, "Register button should be disabled").toBeDisabled()
         await expect(signUpPopup.errorMessage, "Error message should be shown when user has password do not match").toHaveText('Passwords do not match')
         await expect(signUpPopup.reenterInput).toHaveCSS('border-color', redBorder)

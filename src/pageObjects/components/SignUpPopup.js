@@ -30,7 +30,7 @@ export default class SignUpPopup extends BaseComponent {
         await this.emailInput.fill(email)
         await this.passwordInput.fill(password)
         await this.reenterInput.fill(reenterPassword)
-        if (switchFocus) await this.nameInput.focus()
+        if (switchFocus) await this.reenterInput.blur()
     }
 
 }

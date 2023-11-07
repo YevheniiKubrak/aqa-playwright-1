@@ -6,12 +6,12 @@ import SignUpPopup from "../components/SignUpPopup.js";
 export default class WelcomePage extends BasePage {
     constructor(page) {
         super(page, '/', page.locator('button', {hasText: 'Guest log in'}));
+        this.signUpButton = this._page.locator('button:text("Sign up")');
     }
 
     async openSignupPopup(){
-        const signUpButton = this._page.locator('button:text("Sign up")');
-        await expect(signUpButton, "Registration link should be visible").toBeVisible();
-        await signUpButton.click();
+        await expect(this.signUpButton, "Registration link should be visible").toBeVisible();
+        await this.signUpButton.click();
         return new SignUpPopup(this._page)
     }
 }
