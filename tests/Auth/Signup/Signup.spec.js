@@ -2,7 +2,7 @@ import { fa, faker } from '@faker-js/faker';
 import {expect, test} from "@playwright/test";
 import WelcomePage from '../../../src/pageObjects/welcomePage/WelcomePage';
 
-test.describe('Account creation', ()=>{
+test.describe('Account creation @smoke', ()=>{
     let page
     let welcomePage
     let signUpPopup
@@ -37,7 +37,7 @@ test.describe('Account creation', ()=>{
     )
 });
 
-test.describe('Sign up validation', ()=>{
+test.describe('Sign up validation @regression', ()=>{
     let page
     let welcomePage
     let signUpPopup
