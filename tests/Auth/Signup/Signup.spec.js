@@ -33,7 +33,8 @@ test.describe('Account creation @smoke', ()=>{
         }
         signUpPopup = await welcomePage.openSignupPopup()
         await signUpPopup.createAccount(signUpData)
-        }
+        console.log(signUpData)
+    }
     )
 });
 
