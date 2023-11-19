@@ -8,8 +8,8 @@ export const test = base.extend(({
             storageState: STORAGE_STATE_USER_PATH
         })
         const page = await ctx.newPage()
-
         const garagePage = new GaragePage(page);
+        await garagePage.navigate();
         await use(garagePage); 
     }
 }))
