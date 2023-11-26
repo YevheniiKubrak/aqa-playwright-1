@@ -1,6 +1,6 @@
 import { fa, faker } from '@faker-js/faker';
 import {expect, test} from "@playwright/test";
-import WelcomePage from '../../../src/pageObjects/welcomePage/WelcomePage';
+import WelcomePage from '../../../../src/pageObjects/welcomePage/WelcomePage';
 
 test.describe('Account creation @smoke', ()=>{
     let page
