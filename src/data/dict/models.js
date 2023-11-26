@@ -140,3 +140,8 @@ export const VALID_BRAND_MODELS = {
         ]
     }
 }
+
+export const INVALID_BRAND_MODEL_RESPONSE = {
+    "status": "error",
+    "message": "Invalid car model type"
+}

@@ -1,10 +1,11 @@
 import { expect } from "@playwright/test";
 import { test } from "../../src/fixtures/test.fixture";
 import { VALID_BRANDS_RESPONSE_BODY } from "../../src/data/dict/brands";
-import { VALID_BRAND_MODELS } from "../../src/data/dict/models";
+import { INVALID_BRAND_MODEL_RESPONSE, VALID_BRAND_MODELS } from "../../src/data/dict/models";
 import axios from "axios";
 import { USERS } from "../../src/data/dict/users";
 import { config } from "../../config/config";
+import { INVALID_MILEAGE_RESPONSE } from "../../src/data/dict/mileage";
 
 test.describe('API', ()=>{
     let client
@@ -46,13 +47,9 @@ test.describe('API', ()=>{
         console.log(requestBody)
         console.log(response.data)
     })
-    test('Should give correct response for invalid modelID', async({userAPIClient})=>{
+    test('Should give correct response for invalid modelID', async()=>{
         const brandId = VALID_BRANDS_RESPONSE_BODY.data[0].id
         const modelId = "Bober"
-        const badRequest = {
-            "status": "error",
-            "message": "Invalid car model type"
-          }
 
         const requestBody = {
             "carBrandId": brandId,
@@ -61,15 +58,11 @@ test.describe('API', ()=>{
         }
         const response = await client.post('/cars', requestBody)
         expect(response.status, "400 response should be returned").toEqual(400)
-        expect(response.data, "Server should give apropriate response").toMatchObject(badRequest)
+        expect(response.data, "Server should give apropriate response").toMatchObject(INVALID_BRAND_MODEL_RESPONSE)
     })
-    test('Should give correct response for data type', async({userAPIClient})=>{
+    test('Should give correct response for data type', async()=>{
         const brandId = VALID_BRANDS_RESPONSE_BODY.data[0].id
         const modelId = VALID_BRAND_MODELS[brandId].data[1].id
-        const badRequest = {
-            "status": "error",
-            "message": "Invalid mileage type"
-          }
 
         const requestBody = {
             "carBrandId": brandId,
@@ -78,6 +71,6 @@ test.describe('API', ()=>{
         }
         const response = await client.post('/cars', requestBody)
         expect(response.status, "400 response should be returned").toEqual(400)
-        expect(response.data, "Server should give apropriate response").toMatchObject(badRequest)
+        expect(response.data, "Server should give apropriate response").toMatchObject(INVALID_MILEAGE_RESPONSE)
     })
 })
