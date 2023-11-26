@@ -3,7 +3,7 @@ import { test } from "../../src/fixtures/test.fixture";
 import WelcomePage from "../../src/pageObjects/welcomePage/WelcomePage";
 import { STORAGE_STATE_USER_PATH } from "../../src/data/storageState";
 
-test('Login as user and save storag state', async ({page, context})=>{
+test('Login as user and save storage state', async ({page, context})=>{
     const welcomePage = new WelcomePage(page)
     await welcomePage.navigate()
     const popup = await welcomePage.openSignInPopup()
