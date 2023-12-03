@@ -28,3 +28,5 @@ export const VALID_BRANDS_RESPONSE_BODY = {
         }
     ]
 }
+
+export const INVALID_CAR_BRAND_ID = 183
