@@ -1,6 +1,6 @@
 import { expect } from "@playwright/test"
 import { VALID_BRANDS_RESPONSE_BODY } from "../../src/data/dict/brands"
-import { USER_CARS } from "../../src/data/dict/users"
+import { USER_CARS } from "./fixtures/carData"
 import { test } from "../../src/fixtures/test.fixture"
 import { VALID_MODELS_LIST } from "../../src/data/dict/models"
 import { INVALID_CAR_BRAND_ID } from "./fixtures/carBrands"
