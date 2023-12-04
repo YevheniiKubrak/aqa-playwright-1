@@ -1,8 +1,11 @@
 import { expect } from "@playwright/test"
-import { INVALID_CAR_BRAND_ID, VALID_BRANDS_RESPONSE_BODY } from "../../src/data/dict/brands"
-import { INVALID_USER_CAR_ID, USERS, USER_CARS } from "../../src/data/dict/users"
+import { VALID_BRANDS_RESPONSE_BODY } from "../../src/data/dict/brands"
+import { USER_CARS } from "../../src/data/dict/users"
 import { test } from "../../src/fixtures/test.fixture"
-import { INVALID_MODEL_ID, VALID_MODELS_LIST } from "../../src/data/dict/models"
+import { VALID_MODELS_LIST } from "../../src/data/dict/models"
+import { INVALID_CAR_BRAND_ID } from "./fixtures/carBrands"
+import { INVALID_MODEL_ID } from "./fixtures/carModels"
+import { INVALID_USER_CAR_ID } from "./fixtures/carData"
 
 
 test.describe("/cars get requests", () => {

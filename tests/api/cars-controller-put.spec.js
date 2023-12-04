@@ -1,5 +1,5 @@
 import { test } from "../../src/fixtures/test.fixture";
-import { SAMPLE_CARS, SAMPLE_CARS_INVALID } from "../../src/data/dict/carData";
+import { SAMPLE_CARS, SAMPLE_CARS_INVALID } from "./fixtures/carData";
 import { USERS } from "../../src/data/dict/users";
 import { expect } from "@playwright/test";
 

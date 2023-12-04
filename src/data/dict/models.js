@@ -173,5 +173,3 @@ export const INVALID_BRAND_MODEL_RESPONSE = {
     "status": "error",
     "message": "Invalid car model type"
 }
-
-export const INVALID_MODEL_ID = 111

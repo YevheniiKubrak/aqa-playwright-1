@@ -1,0 +1,1 @@
+export const INVALID_MODEL_ID = 111

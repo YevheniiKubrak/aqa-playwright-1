@@ -114,6 +114,4 @@ export const USER_CARS = {
                   "logo": "audi.png"
               }
           ]
-      }}
-
-export const INVALID_USER_CAR_ID = 789654123
+}}

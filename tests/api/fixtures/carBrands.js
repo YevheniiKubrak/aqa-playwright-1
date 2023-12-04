@@ -1,0 +1,1 @@
+export const INVALID_CAR_BRAND_ID = 183

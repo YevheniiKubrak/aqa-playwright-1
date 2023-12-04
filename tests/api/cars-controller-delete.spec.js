@@ -1,6 +1,6 @@
 import { expect } from "@playwright/test";
-import { SAMPLE_CARS } from "../../src/data/dict/carData";
-import { INVALID_USER_CAR_ID, USERS } from "../../src/data/dict/users";
+import { INVALID_USER_CAR_ID, SAMPLE_CARS } from "./fixtures/carData";
+import { USERS } from "../../src/data/dict/users";
 import { test } from "../../src/fixtures/test.fixture";
 
 test.describe("/cars delete request", ()=>{

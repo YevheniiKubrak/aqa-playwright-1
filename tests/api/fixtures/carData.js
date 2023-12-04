@@ -23,3 +23,5 @@ export const SAMPLE_CARS_INVALID = {
         mileage: 99999999999
     }
 }
+
+export const INVALID_USER_CAR_ID = 789654123
