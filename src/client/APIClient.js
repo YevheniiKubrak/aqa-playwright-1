@@ -10,7 +10,7 @@ export default class APIClient {
     }
 
 
-  static async authenticate(options = {baseUrl: config.apiURL}, userData){
+  static async authenticate(userData, options = { baseUrl: config.apiURL }){
         const jar = new CookieJar()
         const params = {...options, cookies: jar}
         const authController = new AuthController(params)
