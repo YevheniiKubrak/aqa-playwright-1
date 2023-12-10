@@ -1,7 +1,7 @@
 import { expect } from "@playwright/test";
-import { test } from "../../src/fixtures/test.fixture";
-import { VALID_BRANDS_RESPONSE_BODY } from "../../src/data/dict/brands";
-import { VALID_BRAND_MODELS } from "../../src/data/dict/models";
+import { test } from "../../../src/fixtures/test.fixture";
+import { VALID_BRANDS_RESPONSE_BODY } from "../../../src/data/dict/brands";
+import { VALID_BRAND_MODELS } from "../../../src/data/dict/models";
 
 test.describe('API', ()=>{
     test('Should create new car', async({userAPIClient})=>{

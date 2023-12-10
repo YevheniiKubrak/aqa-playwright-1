@@ -100,6 +100,7 @@ test.describe("/Cars and brands requests with wrong Id", ()=>{
 
     test('Should return correct error upon recieving incorect brand Id', async({client})=>{
         const response = await client.cars.getCarBrandById(INVALID_CAR_BRAND_ID)
+        const body = response.data
         
         expect(response.status, "Status code should be 404").toEqual(404)
         expect(body.message,"Body should contain clear error message").toContain("No car brands found with this id")
@@ -107,13 +108,15 @@ test.describe("/Cars and brands requests with wrong Id", ()=>{
 
     test('Should return correct error upon recieving incorect model Id', async({client})=>{
         const response = await client.cars.getCarModelById(INVALID_MODEL_ID)
-        expect(response.status, "Status code should be 404").toEqual(404)
+        const body = response.data
 
+        expect(response.status, "Status code should be 404").toEqual(404)
         expect(body.message,"Body should contain clear error message").toContain("No car models found with this id")
     })
 
     test('Should return correct error upon recieving incorect user car Id', async({client})=>{
         const response = await client.cars.getUserCarById(INVALID_USER_CAR_ID)
+        const body = response.data
 
         expect(response.status, "Status code should be 404").toEqual(404)
         expect(body.message,"Body should contain clear error message").toContain("Car not found")
