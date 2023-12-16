@@ -18,7 +18,7 @@ jobs:
           HTTP_CREDENTIALS_USERNAME=${{secrets.HTTP_CREDENTIALS_USERNAME}} HTTP_CREDENTIALS_PASSWORD=${{secrets.HTTP_CREDENTIALS_PASSWORD}} docker-compose up --exit-code-from auto-tests
       - name: "Upload artifacts"
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v2
         with:
           name: test-report
           path: playwright-report/
