@@ -15,11 +15,12 @@ jobs:
           cp '.env.example.stage' '.env'
       - name: "Run tests"
         run: |
-          HTTP_CREDENTIALS_USERNAME=${{secrets.HTTP_CREDENTIALS_USERNAME}} HTTP_CREDENTIALS_PASSWORD=${{secrets.HTTP_CREDENTIALS_PASSWORD}} docker-compose up --exit-code-from auto-tests
+          HTTP_CREDENTIALS_USERNAME=${secrets.HTTP_CREDENTIALS_USERNAME} 
+          HTTP_CREDENTIALS_PASSWORD=${secrets.HTTP_CREDENTIALS_PASSWORD} 
+          docker-compose up --exit-code-from auto-tests
       - name: "Upload artifacts"
-        if: always()
-        uses: actions/upload-artifact@v2
+        if: failure()
+        uses: actions/upload-artifact@v3
         with:
           name: test-report
           path: playwright-report/
-          retention-days: 5
